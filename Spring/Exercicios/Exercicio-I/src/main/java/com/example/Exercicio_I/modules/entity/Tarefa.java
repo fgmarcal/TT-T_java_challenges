@@ -6,7 +6,7 @@ public class Tarefa {
     private String descricao;
     private boolean completa;
 
-    private static int counter;
+    private static long counter;
 
     public Tarefa(String descricao) {
         counter++;
