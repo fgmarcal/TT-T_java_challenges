@@ -1,8 +1,8 @@
 package org.example.exercicioiii.modules.service;
 
-import org.example.exercicioiii.modules.entity.Produto.CreateProdutoDTO;
+import org.example.exercicioiii.modules.dto.ProdutoDTO.CreateProdutoDTO;
 import org.example.exercicioiii.modules.entity.Produto.Produto;
-import org.example.exercicioiii.modules.entity.Produto.UpdateProdutoDTO;
+import org.example.exercicioiii.modules.dto.ProdutoDTO.UpdateProdutoDTO;
 import org.example.exercicioiii.modules.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

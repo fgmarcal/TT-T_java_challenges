@@ -4,9 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.exercicioiii.modules.entity.Produto.CreateProdutoDTO;
+import org.example.exercicioiii.modules.dto.ProdutoDTO.CreateProdutoDTO;
 import org.example.exercicioiii.modules.entity.Produto.Produto;
-import org.example.exercicioiii.modules.entity.Produto.UpdateProdutoDTO;
+import org.example.exercicioiii.modules.dto.ProdutoDTO.UpdateProdutoDTO;
 import org.example.exercicioiii.modules.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -83,6 +83,11 @@ public class ProdutoController {
 
     @PutMapping("/produtos/{id}")
     @Operation(description = "Atualiza o nome ou preço do produto", method = "PUT")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Produto não existe"),
+            @ApiResponse(responseCode = "401", description = "Sem autorização para processar requisição")
+    })
     public ResponseEntity updateProduto(@PathVariable long id, @RequestBody UpdateProdutoDTO updateProdutoDTO) {
         try{
             produtoService.updateProdutoById(id, updateProdutoDTO);
