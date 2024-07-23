@@ -24,8 +24,8 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public Optional<Produto> findById(Long id) {
-        var found = produtoRepository.findById(id);
-        return Optional.of(found.orElseThrow());
+        Optional<Produto> found = Optional.of(produtoRepository.findById(id).orElseThrow());
+        return found;
     }
 
     @Override
@@ -37,12 +37,12 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public void updateProdutoById(UpdateProdutoDTO dto) {
-        Optional<Produto> found = Optional.of(produtoRepository.findById(dto.id()).orElseThrow());
-        if(found.isPresent() && !found.get().getNome().equals(dto.nome()) && !(dto.nome() == null)) {
+    public void updateProdutoById(long id, UpdateProdutoDTO dto) {
+        Optional<Produto> found = Optional.of(produtoRepository.findById(id).orElseThrow());
+        if(checaNomeProduto(dto, found)) {
             found.get().setNome(dto.nome());
         }
-        if(found.isPresent() && found.get().getPreco() != dto.preco() && dto.preco()!= 0.0) {
+        if(checaPrecoProduto(dto, found)) {
             found.get().setPreco(dto.preco());
         }
         produtoRepository.save(found.get());
@@ -50,7 +50,21 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public void deleteProdutoById(long id) {
-        var found = produtoRepository.findById(id).orElseThrow();
-        produtoRepository.delete(found);
+        Optional<Produto> found = Optional.of(produtoRepository.findById(id).orElseThrow());
+        produtoRepository.delete(found.get());
+    }
+
+    private boolean checaNomeProduto(UpdateProdutoDTO dto, Optional<Produto> produto) {
+        if(produto.isPresent() && !produto.get().getNome().equals(dto.nome()) && !(dto.nome() == null) && !(dto.nome() == "")) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checaPrecoProduto(UpdateProdutoDTO dto, Optional<Produto> produto) {
+        if(produto.isPresent() && produto.get().getPreco() != dto.preco() && dto.preco()!= 0.0) {
+            return true;
+        }
+        return false;
     }
 }

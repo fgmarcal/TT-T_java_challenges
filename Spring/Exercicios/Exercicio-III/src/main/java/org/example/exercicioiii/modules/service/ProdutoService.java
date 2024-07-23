@@ -12,7 +12,7 @@ public interface ProdutoService {
     List<Produto> findAll();
     Optional<Produto> findById(Long id);
     void createProduto(CreateProdutoDTO dto);
-    void updateProdutoById(UpdateProdutoDTO dto);
+    void updateProdutoById(long id, UpdateProdutoDTO dto);
     void deleteProdutoById(long id);
 
 }
