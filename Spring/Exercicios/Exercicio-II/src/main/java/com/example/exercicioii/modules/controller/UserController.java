@@ -51,6 +51,7 @@ public class UserController {
             Usuario usuario = userRepository.findById(id).orElseThrow();
             return ResponseEntity.ok(usuario);
         }catch (Exception e) {
+            e.getStackTrace();
             return ResponseEntity.notFound().build();
         }
     }
@@ -67,6 +68,7 @@ public class UserController {
             userRepository.deleteById(id);
             return ResponseEntity.ok().build();
         }catch (Exception e){
+            e.getStackTrace();
             return ResponseEntity.notFound().build();
         }
     }
