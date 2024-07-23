@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController("/")
-@Tag(name = "User Controller")
+@Tag(name = "Endpoint do Usuário - User Controller")
 public class UserController {
 
     @Autowired
